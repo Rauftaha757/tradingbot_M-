@@ -1,0 +1,59 @@
+    def get_quote_of_the_day(self):
+        if not self.quotes_data:
+            return None
+        # Use today's date to always pick same quote each day
+        seed = int(time.strftime("%Y%m%d"))
+        random.seed(seed)
+        return random.choice(self.quotes_data)
+
+    def export_qotd(self, filename="quote_of_the_day.txt"):
+        quote = self.get_quote_of_the_day()
+        if not quote:
+            print("No quotes loaded.")
+            return
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(f"\"{quote['quote']}\"\n\n")
+            f.write(f"— {quote['author']}\n")
+            f.write(f"Tags: {quote['tags']}")
+        print(f"[📝] Exported Quote of the Day to '{filename}'.")
+    def author_stats(self):
+        authors = {}
+        for q in self.quotes_data:
+            authors[q['author']] = authors.get(q['author'], 0) + 1
+        return sorted(authors.items(), key=lambda x: x[1], reverse=True)
+
+    def tag_stats(self):
+        tag_counts = {}
+        for q in self.quotes_data:
+            for tag in q['tags'].split(', '):
+                tag_counts[tag] = tag_counts.get(tag, 0) + 1
+        return sorted(tag_counts.items(), key=lambda x: x[1], reverse=True)
+        print("7. View quote of the day")
+        print("8. Export quote of the day to TXT")
+        print("9. Author stats")
+        print("10. Tag stats")
+        print("11. Clear console")
+        print("12. Exit")
+        elif choice == "7":
+            qotd = scraper.get_quote_of_the_day()
+            if qotd:
+                print("\n🌞 Quote of the Day 🌞")
+                display_quote(qotd)
+
+        elif choice == "8":
+            scraper.export_qotd()
+
+        elif choice == "9":
+            stats = scraper.author_stats()
+            print("\n📊 Author Stats:")
+            for author, count in stats:
+                print(f"{author}: {count} quote(s)")
+
+        elif choice == "10":
+            stats = scraper.tag_stats()
+            print("\n🏷️  Tag Stats:")
+            for tag, count in stats:
+                print(f"{tag}: {count} tag(s)")
+
+        elif choice == "11":
+            clear_console()
