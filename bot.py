@@ -8,7 +8,7 @@ ACCOUNT = 192846215             # Replace with your MT5 account number
 PASSWORD = "Shahzaib.786"     # Replace with your MT5 password
 SERVER = "Exness-MT5Trial"   # Replace with your broker's server name
 SYMBOL = "XAUUSDm"
-LOT_SIZE = 0.1
+LOT_SIZE = 0.01
 POINT_DIFFERENCE = 3           # TP/SL = ±3 points from entry
 TRADE_INTERVAL = 900           # 15 minutes in seconds
 MAGIC_NUMBER = 123456
